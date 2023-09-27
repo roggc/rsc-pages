@@ -13,7 +13,41 @@ const distInputEntries = {
   router: "src/server/components/router.js",
 };
 
+const netlifyEntries = {
+  app: "netlify/functions/app.js",
+  router: "src/server/components/router.js",
+};
+
 export default [
+  {
+    input: (await globby("src/client/*.js"))
+      .concat(await globby("src/client/components/*.js"))
+      .reduce(
+        (acc, entryFile) => ({
+          ...acc,
+          [entryFile.replace(".js", "").replace("src/", "")]: entryFile,
+        }),
+        netlifyEntries
+      ),
+    output: {
+      dir: "distnetlify",
+      format: "esm",
+      preserveModules: true,
+    },
+    plugins: [
+      babel({ babelHelpers: "bundled", exclude: "node_modules/**" }),
+      alias({
+        entries: [
+          {
+            find: "styled-components",
+            replacement:
+              "node_modules/styled-components/dist/styled-components.esm.js",
+          },
+        ],
+      }),
+      image(),
+    ],
+  },
   {
     input: (await globby("src/client/*.js"))
       .concat(await globby("src/client/components/*.js"))
