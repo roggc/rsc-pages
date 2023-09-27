@@ -80,7 +80,7 @@ const Container = styled(({ pageName, ...props }) => <div {...props} />)`
   flex: 1;
   max-height: 100%;
   overflow: auto;
-  margin: 10px;
+  margin: 0 10px 10px 10px;
   max-width: 910px;
 `;
 
@@ -114,7 +114,7 @@ const Nav = styled(({ isShown, ...props }) => <div {...props} />)`
   background-color: white;
   height: calc(100% - 10px);
   z-index: 9999;
-  margin: 10px 0 0;
+  --margin: 10px 0 0;
   box-sizing: border-box;
 `;
 
@@ -126,4 +126,5 @@ const SupraContainer = styled.div`
 
 const Header = styled.div`
   display: flex;
+  margin: 10px;
 `;
