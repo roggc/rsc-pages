@@ -25,7 +25,7 @@ export default [
       .reduce(
         (acc, entryFile) => ({
           ...acc,
-          [entryFile.replace(".js", "").replace("src/", "")]: entryFile,
+          [entryFile.replace(".js", "")]: entryFile,
         }),
         netlifyEntries
       ),
