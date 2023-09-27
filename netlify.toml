@@ -1,5 +1,4 @@
 [functions]
-  external_node_modules = ["express","react-dom/server","react","ua-parser-js","serverless-http"]
   node_bundler="esbuild"
 [[redirects]]
   force = true
