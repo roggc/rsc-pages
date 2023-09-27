@@ -14,8 +14,8 @@ const distInputEntries = {
 };
 
 const netlifyEntries = {
-  "functions/app": "netlify/functions/app.js",
-  router: "src/server/components/router.js",
+  "functions/app.mjs": "netlify/functions/app.js",
+  "router.mjs": "src/server/components/router.js",
 };
 
 export default [
@@ -33,6 +33,7 @@ export default [
       dir: "distnetlify",
       format: "esm",
       preserveModules: true,
+      entryFileNames: "[name].mjs",
     },
     plugins: [
       babel({ babelHelpers: "bundled", exclude: "node_modules/**" }),
