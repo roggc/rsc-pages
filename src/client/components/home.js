@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
       <Title>THE RSC SETUP</Title>
-      <Image src={img1} borderRadius="10px" maxWidth="100%" alt="react" />
+      <Image src={img1} borderRadius="10px" maxWidth="80%" alt="react" />
       <Div>
         <button onClick={() => setCount((c) => c + 1)}>
           get Greeting of the Day (from server)
