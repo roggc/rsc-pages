@@ -1,6 +1,6 @@
-[[functions]]
+[functions]
   node_bundler="none"
-  
+
 [[redirects]]
   force = true
   from = "/*"
