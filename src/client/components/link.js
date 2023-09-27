@@ -2,7 +2,7 @@ import { useSlice } from "../slices";
 import React from "react";
 import styled from "styled-components";
 
-export default function Link({ page, children, ...props }) {
+export default function Link({ page, children, onClickExtension, ...props }) {
   const [pageSelected, setPage] = useSlice("page");
   const isSamePage = pageSelected.name === page.name;
 
@@ -15,6 +15,7 @@ export default function Link({ page, children, ...props }) {
           history.pushState(page, null, "");
           setPage(page);
         }
+        onClickExtension?.();
       }}
       isActive={isSamePage}
       {...props}

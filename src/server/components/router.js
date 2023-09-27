@@ -5,13 +5,15 @@ import RCC from "./rcc.js";
 
 const title = "My app";
 
-export default async function Router({ url, body: { props } }) {
+export default async function Router({ url, body: { props }, deviceType }) {
   switch (url.pathname.slice(1)) {
     case "":
       return (
-        <RCC __isClient__="../components/theme-provider.js" theme={theme}>
-          <RCC __isClient__="../slices.js">
-            <RCC __isClient__="../components/layout.js" title={title} />
+        <RCC __isClient__="../device-context.js" value={deviceType}>
+          <RCC __isClient__="../components/theme-provider.js" theme={theme}>
+            <RCC __isClient__="../slices.js">
+              <RCC __isClient__="../components/layout.js" title={title} />
+            </RCC>
           </RCC>
         </RCC>
       );

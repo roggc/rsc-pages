@@ -4,6 +4,7 @@ import { fillJSXwithClientComponents } from "../client/utils/index.js";
 import Router from "./components/router.js";
 import { renderJSXToClientJSX, stringifyJSX } from "./utils/index.js";
 import React from "react";
+import uaParser from "ua-parser-js";
 
 const app = express();
 app.use(express.static("public"));
@@ -14,14 +15,27 @@ app.get("/favicon.ico", (req, res, next) => {
   res.end("");
 });
 
+async function getJSX(url, req, deviceType) {
+  const clientJSX = await renderJSXToClientJSX(
+    <Router url={url} body={req.body} deviceType={deviceType} />
+  );
+  return {
+    clientJSX,
+    clientJSXString: JSON.stringify(clientJSX, stringifyJSX),
+  };
+}
+
 app.use(async (req, res, next) => {
   try {
     const url = new URL(req.url, `http://${req.headers.host}`);
-    const clientJSX = await renderJSXToClientJSX(
-      <Router url={url} body={req.body} />
-    );
-    const clientJSXString = JSON.stringify(clientJSX, stringifyJSX);
     if (url.pathname === "/") {
+      const userAgent = new uaParser(req.headers["user-agent"]);
+      const { type } = userAgent.getDevice();
+      const { clientJSX, clientJSXString } = await getJSX(
+        url,
+        req,
+        type ?? "desktop"
+      );
       const fixedJSX = await fillJSXwithClientComponents(clientJSX);
       const bootstrapScriptContent = `window.__INITIAL_CLIENT_JSX_STRING__ = ${clientJSXString};`;
       const { pipe } = renderToPipeableStream(fixedJSX, {
@@ -33,6 +47,7 @@ app.use(async (req, res, next) => {
         },
       });
     } else {
+      const { clientJSXString } = await getJSX(url, req);
       res.setHeader("Content-Type", "application/json");
       res.end(clientJSXString);
     }
