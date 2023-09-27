@@ -14,7 +14,7 @@ const distInputEntries = {
 };
 
 const netlifyEntries = {
-  app: "netlify/functions/app.js",
+  "functions/app": "netlify/functions/app.js",
   router: "src/server/components/router.js",
 };
 
