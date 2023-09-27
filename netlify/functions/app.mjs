@@ -1,12 +1,12 @@
 import express from "express";
-import { renderToPipeableStream } from "react-dom/server";
+import * as ReactDOMServer from "react-dom/server";
 import { fillJSXwithClientComponents } from "../../src/client/utils/index.js";
 import Router from "../../src/server/components/router.js";
 import {
   renderJSXToClientJSX,
   stringifyJSX,
 } from "../../src/server/utils/index.js";
-import React from "react";
+import * as React from "react";
 import uaParser from "ua-parser-js";
 import serverless from "serverless-http";
 
@@ -42,7 +42,7 @@ app.use(async (req, res, next) => {
       );
       const fixedJSX = await fillJSXwithClientComponents(clientJSX);
       const bootstrapScriptContent = `window.__INITIAL_CLIENT_JSX_STRING__ = ${clientJSXString};`;
-      const { pipe } = renderToPipeableStream(fixedJSX, {
+      const { pipe } = ReactDOMServer.renderToPipeableStream(fixedJSX, {
         bootstrapModules: ["src/client/index.js"],
         bootstrapScriptContent,
         onShellReady() {
