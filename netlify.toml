@@ -1,5 +1,3 @@
-[functions]
-  node_bundler="esbuild"
 [[redirects]]
   force = true
   from = "/*"
