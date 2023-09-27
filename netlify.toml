@@ -1,5 +1,6 @@
 [functions]
   node_bundler="none"
+  directory="distnetlify/functions"
 
 [[redirects]]
   force = true
