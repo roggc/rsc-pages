@@ -46,7 +46,7 @@ export default [
           },
         ],
       }),
-      // peerDepsExternal(),
+      peerDepsExternal(),
       // nodeResolve({
       //   resolveOnly: (module) => !module.includes("react-markdown"),
       // }),
