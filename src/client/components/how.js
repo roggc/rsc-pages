@@ -2,10 +2,13 @@ import React from "react";
 import C from "./code";
 import styled from "styled-components";
 import RM from "./react-markdown";
+import img1 from "../assets/rsc4.png";
+import I from "./image";
 
 export default function How() {
   return (
     <>
+      <Title>Intro</Title>
       <RM>
         In this setup you code normally as in any front-end app until you face a
         component that needs data from the server. In this situation you first
@@ -17,6 +20,18 @@ export default function How() {
         special RCC which its mission is to fetch the server for the RSC we tell
         him.
       </RM>
+      <RM>Next is the files and folders structure of the setup:</RM>
+      <Image src={img1} maxWidth="400px" borderRadius="10px" />
+      <RM>
+        So you will work on the `src/client` folder and on the
+        `src/server/components` folder, that's all.
+      </RM>
+      <RM>
+        On the `client` folder you will use RCC's. When you need a RSC, you will
+        use `RSC` RCC to "call" (fetch) it. This, in turn, will return a RCC
+        with the proper data, fetched from the server (from the RSC).
+      </RM>
+      <RM>This is best described in the rest of this page.</RM>
       <Title>The cycle of programming with this setup</Title>
       <RM>Let's say you need a `Greeting` RCC, like this:</RM>
       <Code>{`export default function Greeting({ greeting }) {
@@ -246,4 +261,8 @@ const Code = styled(C)`
 const Title = styled(RM)`
   font-weight: 700;
   font-size: 1.8rem;
+`;
+
+const Image = styled(I)`
+  align-self: center;
 `;
