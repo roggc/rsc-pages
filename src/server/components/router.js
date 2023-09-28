@@ -9,10 +9,10 @@ export default async function Router({ url, body: { props }, deviceType }) {
   switch (url.pathname.slice(1)) {
     case "":
       return (
-        <RCC __isClient__="../device-context.js" value={deviceType}>
-          <RCC __isClient__="../components/theme-provider.js" theme={theme}>
-            <RCC __isClient__="../slices.js">
-              <RCC __isClient__="../components/layout.js" title={title} />
+        <RCC __isClient__="device-context" value={deviceType}>
+          <RCC __isClient__="components/theme-provider" theme={theme}>
+            <RCC __isClient__="slices">
+              <RCC __isClient__="components/layout" title={title} />
             </RCC>
           </RCC>
         </RCC>
@@ -20,13 +20,13 @@ export default async function Router({ url, body: { props }, deviceType }) {
     case "greeting":
       return <Greeting {...props} />;
     case "how":
-      return <RCC __isClient__="../components/how.js" {...props} />;
+      return <RCC __isClient__="components/how" {...props} />;
     case "is-client-prop":
-      return <RCC __isClient__="../components/is-client-prop.js" />;
+      return <RCC __isClient__="components/is-client-prop" />;
     case "download-and-install":
-      return <RCC __isClient__="../components/download-and-install.js" />;
+      return <RCC __isClient__="components/download-and-install" />;
     case "react-suspense":
-      return <RCC __isClient__="../components/react-suspense.js" />;
+      return <RCC __isClient__="components/react-suspense" />;
     default:
       return <RCC />;
   }

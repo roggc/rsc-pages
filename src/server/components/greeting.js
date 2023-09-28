@@ -10,5 +10,5 @@ export default async function Greeting() {
       return r("good morning");
     }, 500)
   );
-  return <RCC __isClient__="../components/greeting.js" greeting={greeting} />;
+  return <RCC __isClient__="components/greeting" greeting={greeting} />;
 }

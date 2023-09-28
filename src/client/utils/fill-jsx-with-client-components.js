@@ -27,9 +27,13 @@ export async function fillJSXwithClientComponents(jsx) {
           props: await fillJSXwithClientComponents(jsx.props),
         };
       } else if (typeof jsx.type === "object" && jsx.type.file) {
+        const path =
+          typeof window === "undefined"
+            ? "../src/client/".concat(jsx.type.file).concat(".mjs")
+            : "../".concat(jsx.type.file).concat(".js");
         return {
           ...jsx,
-          type: (await import(jsx.type.file)).default,
+          type: (await import(path)).default,
           props: await fillJSXwithClientComponents(jsx.props),
         };
       } else throw new Error("Not implemented.");

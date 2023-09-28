@@ -1,11 +1,11 @@
 import express from "express";
 import { renderToPipeableStream } from "react-dom/server";
-import { fillJSXwithClientComponents } from "../../src/client/utils/index.js";
-import Router from "../../src/server/components/router.js";
+import { fillJSXwithClientComponents } from "../src/client/utils/index.js";
+import Router from "../src/server/components/router.js";
 import {
   renderJSXToClientJSX,
   stringifyJSX,
-} from "../../src/server/utils/index.js";
+} from "../src/server/utils/index.js";
 import React from "react";
 import uaParser from "ua-parser-js";
 import serverless from "serverless-http";

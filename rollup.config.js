@@ -14,7 +14,7 @@ const distInputEntries = {
 };
 
 const netlifyEntries = {
-  "functions/app": "netlify/functions/app.js",
+  "functions/app": "functions/app.js",
   router: "src/server/components/router.js",
 };
 
@@ -46,12 +46,15 @@ export default [
           },
         ],
       }),
-      peerDepsExternal(),
-      nodeResolve({
-        resolveOnly: (module) => !module.includes("react-markdown"),
-      }),
-      commonjs(),
-      json(),
+      // peerDepsExternal(),
+      // nodeResolve({
+      //   resolveOnly: (module) => !module.includes("react-markdown"),
+      // }),
+      // commonjs(),
+      // json(),
+      // replace({
+      //   "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+      // }),
       image(),
     ],
   },
