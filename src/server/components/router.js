@@ -3,7 +3,7 @@ import Greeting from "./greeting.js";
 import theme from "../../client/theme.js";
 import RCC from "./rcc.js";
 
-const title = "My app";
+const title = "THE RSC SETUP";
 
 export default async function Router({ url, body: { props }, deviceType }) {
   switch (url.pathname.slice(1)) {
