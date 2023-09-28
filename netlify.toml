@@ -1,7 +1,7 @@
 [functions]
   node_bundler="esbuild"
   directory="distnetlify/functions"
-  included_files = ["distnetlify/src/**","distnetlify/router.mjs","distnetlify/_virtual/**"]
+  included_files = ["distnetlify/src/**","distnetlify/router.mjs","distnetlify/_virtual/**","public/**"]
   external_node_modules = ["react","react-context-slices","express","ua-parser-js","serverless-http","react-dom/server","tslib","@emotion/is-prop-valid","shallowequal","stylis","@emotion/unitless"]
 
 #[dev]
