@@ -28,7 +28,7 @@ export async function fillJSXwithClientComponents(jsx) {
         };
       } else if (typeof jsx.type === "object" && jsx.type.file) {
         const path =
-          typeof window === "undefined"
+          typeof window === "undefined" && process.env.IS_NETLIFY
             ? "../src/client/".concat(jsx.type.file).concat(".mjs")
             : "../".concat(jsx.type.file).concat(".js");
         return {
