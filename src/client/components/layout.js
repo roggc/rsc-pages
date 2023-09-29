@@ -16,6 +16,10 @@ export default function Layout({ title }) {
     <html>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+          name="google-site-verification"
+          content="LPtzC0bUz5hkUwD8Bh0WFWV1SE4ROetaF3O-jKx2Bpo"
+        />
         <title>{title}</title>
         <style
           dangerouslySetInnerHTML={{ __html: "p{margin:0px;} body{margin:0;}" }}
