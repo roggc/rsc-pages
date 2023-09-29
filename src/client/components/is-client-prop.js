@@ -18,6 +18,12 @@ export default function IsClientProp() {
         For this will help to take a look again at the files-folders structure:
       </RM>
       <Image src={img1} maxWidth="400px" borderRadius="10px" />
+      <RM>
+        To be clear, the `__isClient__` prop it's only used when calling a RCC
+        from a RSC, in the server. Remember we use the `RCC` RSC for that
+        purpose, passing the `__isClient__` prop and any other props that the
+        RCC referenced by the `__isClient__` prop may need.
+      </RM>
     </>
   );
 }
