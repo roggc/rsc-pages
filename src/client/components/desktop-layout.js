@@ -19,13 +19,16 @@ export default function DesktopLayout() {
             Home
           </Link>
           <Link page={{ name: "how" }} cssIsActive="color:orange;">
-            How you code
+            How you code in this setup
           </Link>
           <Link page={{ name: "is-client-prop" }} cssIsActive="color:orange;">
             The __isClient__ prop
           </Link>
           <Link page={{ name: "react-suspense" }} cssIsActive="color:orange;">
             React.Suspense
+          </Link>
+          <Link page={{ name: "eject" }} cssIsActive="color:orange;">
+            Eject
           </Link>
           <Link
             page={{ name: "download-and-install" }}

@@ -27,6 +27,8 @@ export default async function Router({ url, body: { props }, deviceType }) {
       return <RCC __isClient__="components/download-and-install" />;
     case "react-suspense":
       return <RCC __isClient__="components/react-suspense" />;
+    case "eject":
+      return <RCC __isClient__="components/eject" />;
     default:
       return <RCC />;
   }

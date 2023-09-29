@@ -17,6 +17,8 @@ export default function Router() {
       return null;
     case "react-suspense":
       return null;
+    case "eject":
+      return null;
     default:
       return <Ups />;
   }

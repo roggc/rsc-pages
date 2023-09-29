@@ -36,7 +36,7 @@ export default function MobileLayout() {
               cssIsActive="color:orange;"
               onClickExtension={toggleIsShown}
             >
-              How you code
+              How you code in this setup
             </Link>
             <Link
               page={{ name: "is-client-prop" }}
@@ -51,6 +51,13 @@ export default function MobileLayout() {
               onClickExtension={toggleIsShown}
             >
               React.Suspense
+            </Link>
+            <Link
+              page={{ name: "eject" }}
+              cssIsActive="color:orange;"
+              onClickExtension={toggleIsShown}
+            >
+              Eject
             </Link>
             <Link
               page={{ name: "download-and-install" }}

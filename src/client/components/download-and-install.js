@@ -10,11 +10,11 @@ export default function DownloadAndInstall() {
         To download the setup you must `git clone` the repository. For this, you
         must type in a terminal window:
       </RM>
-      <Code>{`git clone https://github.com/roggc/rsc.git`}</Code>
+      <Code>{`git clone https://github.com/roggc/rsc.git my-project-name`}</Code>
       <RM>
         for the RSC setup without SSR. For the RSC setup with SSR you must type:
       </RM>
-      <Code>{`git clone https://github.com/roggc/rsc-ssr.git`}</Code>
+      <Code>{`git clone https://github.com/roggc/rsc-ssr.git my-project-name`}</Code>
       <RM>
         This will create a project in your system (a folder). Then, in a
         terminal window, in the root of the project, type:

@@ -2,7 +2,7 @@ import React from "react";
 import C from "./code";
 import styled from "styled-components";
 import RM from "./react-markdown";
-import img1 from "../assets/rsc4.png";
+import img1 from "../assets/rsc5.png";
 import I from "./image";
 
 export default function How() {
@@ -34,7 +34,9 @@ export default function How() {
       <RM>This is best described in the rest of this page.</RM>
       <Title>The cycle of programming with this setup</Title>
       <RM>Let's say you need a `Greeting` RCC, like this:</RM>
-      <Code>{`export default function Greeting({ greeting }) {
+      <Code>{`import React from "react";
+
+export default function Greeting({ greeting }) {
   return <>{greeting}</>;
 }`}</Code>
       <RM>
@@ -42,29 +44,34 @@ export default function How() {
         screen. But this `greeting` prop must be retrieved from the server. So
         in this situation we code a `Greeting` RSC that will do the job:
       </RM>
-      {/* <CodeContainer> */}
-      <Code>{`export default async function Greeting() {
+      <Code>{`import React from "react";
+import { RCC } from "rsc-module/server";
+
+export default async function Greeting() {
+  const value = Math.random() < 0.5;
   const greeting = await new Promise((r) =>
     setTimeout(() => {
-      if (Math.random() < 0.5) {
-        return r("aloha");
+      switch (value) {
+        case true:
+          return r("Whatsupp!!!");
+        case false:
+          return r("How r u doing?");
       }
-      return r("good morning");
     }, 500)
   );
-  return <RCC __isClient__="../components/greeting.js" greeting={greeting} />;
+
+  return <RCC __isClient__="components/greeting" greeting={greeting} />;
 }`}</Code>
-      {/* </CodeContainer> */}
       <RM>
         First thing to notice is that the RSC is async. RSC's are async
         functions. Second thing, is the `return` statement:
       </RM>
-      <Code>{`return <RCC __isClient__="../components/greeting.js" greeting={greeting} />;`}</Code>
+      <Code>{`return <RCC __isClient__="components/greeting" greeting={greeting} />;`}</Code>
       <RM>
         `RCC` it's an RSC that does nothing. The important thing is the props we
         pass to it, the `__isClient__` prop and the `greeting` prop.
       </RM>
-      <Code>{`export default async function RCC() {
+      <Code>{`export async function RCC() {
   return null;
 }`}</Code>
       <RM>
@@ -77,13 +84,16 @@ export default function How() {
         a mechanism to call the RSC from a RCC. This will be done by the `RSC`
         RCC:
       </RM>
-      <Code>{`export default function RSC({
-  componentName,
+      <Code>{`import React, { useEffect, useState } from "react";
+import { fillJSXWithClientComponents, parseJSX } from "../utils/index.js";
+
+export function RSC({
+  componentName = "__no_component_name__",
   children = <>loading ...</>,
   errorJSX = <>something went wrong</>,
   ...props
 }) {
-  const [JSX, setJSX] = React.useState(children);
+  const [JSX, setJSX] = useState(children);
   const body = JSON.stringify({ props });
 
   useEffect(() => {
@@ -96,19 +106,23 @@ export default function How() {
       .then(async (response) => {
         const clientJSXString = await response.text();
         const clientJSX = JSON.parse(clientJSXString, parseJSX);
-        const fixedClientJSX = await fillJSXwithClientComponents(clientJSX);
+        const fixedClientJSX = await fillJSXWithClientComponents(clientJSX);
         setJSX(fixedClientJSX);
       })
       .catch(() => setJSX(errorJSX));
   }, [componentName, body]);
 
   return JSX;
-}`}</Code>
+}
+`}</Code>
       <RM>
         These are implementation details. The only thing you need to do in your
         code to call a RSC from a RCC is:
       </RM>
-      <Code>{`export default function SomeRCC() {
+      <Code>{`import React from "react";
+import {RSC} from "rsc-module/client";
+
+export default function SomeRCC() {
   // ...
   return (
     <>
@@ -122,12 +136,16 @@ export default function How() {
         Last thing to do is to connect the call to `greeting` route in the
         server to the `Greeting` RSC. This is done in the `Router` RSC:
       </RM>
-      <Code>{`export default async function Router({ url, body: { props } }) {
-  switch (url.pathname.slice(1)) {
-    // ...
+      <Code>{`import React from "react";
+import { RCC } from "rsc-module/server";
+import Greeting from "./greeting.js";
+
+export default async function Router({ componentName, props }) {
+  switch (componentName) {
     case "greeting":
       return <Greeting {...props} />;
-    // ...
+    default:
+      return <RCC __isClient__="components/ups" />;
   }
 }`}</Code>
       <RM>
@@ -142,34 +160,65 @@ export default function How() {
         cycle).
       </RM>
       <RM>First, code the `Greeting` RCC and the `Greeting` RSC:</RM>
-      <Code>{`export default function Greeting({ greeting }) {
+      <Code>{`import React from "react";
+
+export default function Greeting({ greeting }) {
   return <>{greeting}</>;
 }`}</Code>
-      <Code>{`export default async function Greeting() {
+      <Code>{`import React from "react";
+import { RCC } from "rsc-ssr-module/server";
+
+export default async function Greeting() {
+  const value = Math.random() < 0.5;
   const greeting = await new Promise((r) =>
     setTimeout(() => {
-      if (Math.random() < 0.5) {
-        return r("aloha");
+      switch (value) {
+        case true:
+          return r("Whatsupp!!!");
+        case false:
+          return r("How r u doing?");
       }
-      return r("good morning");
     }, 500)
   );
-  return <RCC __isClient__="../components/greeting.js" greeting={greeting} />;
+
+  return <RCC greeting={greeting} __isClient__="components/greeting" />;
 }`}</Code>
       <RM>
         Second, add the route to the `Router` RSC to connect the call to the
         server to the `Greeting` RSC:
       </RM>
-      <Code>{`export default async function Router({ url, body: { props } }) {
-  switch (url.pathname.slice(1)) {
-    // ...
+      <Code>{`import React from "react";
+import Greeting from "./greeting.js";
+import { RCC } from "rsc-ssr-module/server";
+import theme from "../../client/theme.js";
+
+const title = "My App";
+
+const Router = async ({ componentName, props }) => {
+  switch (componentName) {
+    case "":
+      return (
+        <RCC __isClient__="components/theme-provider" theme={theme}>
+          <RCC __isClient__="slices">
+            <RCC __isClient__="components/layout" title={title}>
+              <RCC __isClient__="components/app" />
+            </RCC>
+          </RCC>
+        </RCC>
+      );
     case "greeting":
       return <Greeting {...props} />;
-    // ...
+    default:
+      return <RCC __isClient__="components/ups" />;
   }
-}`}</Code>
+};
+
+export default Router;`}</Code>
       <RM>And finally, call the RSC from a RCC, using the `RSC` RCC:</RM>
-      <Code>{`export default function SomeRCC() {
+      <Code>{`import React from "react";
+import {RSC} from "rsc-ssr-module/client";      
+
+export default function SomeRCC() {
   // ...
   return (
     <>
@@ -198,7 +247,10 @@ export default function How() {
         data will be `How are you doing?`. So this is done passing the
         `isFriend` prop from the call to the `RSC` RCC in the client:
       </RM>
-      <Code>{`export default function SomeRCC() {
+      <Code>{`import React from "react";
+import {RSC} from "rsc-module/client";
+
+export default function SomeRCC() {
   // ...
   return (
     <>
@@ -209,7 +261,10 @@ export default function How() {
   );
 }`}</Code>
       <RM>Then in the `SayHello` RSC we will have:</RM>
-      <Code>{`export default async function SayHello({ isFriend }) {
+      <Code>{`import React from "react";
+import {RCC} from "rsc-module/server";
+
+export default async function SayHello({ isFriend }) {
   const data = await new Promise((r) =>
     setTimeout(() => {
       if (isFriend) {
@@ -218,15 +273,20 @@ export default function How() {
       return r("How are you doing?");
     }, 500)
   );
-  return <RCC __isClient__="../components/say-hello.js" message={data} />;
+  return <RCC __isClient__="components/say-hello" message={data} />;
 }`}</Code>
       <RM>The `SayHello` RCC will be just:</RM>
-      <Code>{`export default function SayHello({ message }) {
+      <Code>{`import React from "react";
+
+export default function SayHello({ message }) {
   return <>{message}</>;
 }`}</Code>
       <RM>And the `Router` RSC will be like:</RM>
-      <Code>{`export default async function Router({ url, body: { props } }) {
-  switch (url.pathname.slice(1)) {
+      <Code>{`import React from "react";
+import SayHello from "./say-hello.js";
+
+export default async function Router({ componentName, props }) {
+  switch (componentName) {
     // ...
     case "say-hello":
       return <SayHello {...props} />;
