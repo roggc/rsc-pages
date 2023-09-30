@@ -64,7 +64,7 @@ export default function MobileLayout() {
               cssIsActive="color:orange;"
               onClickExtension={toggleIsShown}
             >
-              Download and run
+              create-rsc-app
             </Link>
           </Nav>
           <Container pageName={page.name} onClick={() => setIsShown(false)}>

@@ -6,7 +6,7 @@ import RM from "./react-markdown";
 export default function DownloadAndInstall() {
   return (
     <>
-      <RM>
+      {/* <RM>
         To download the setup you must `git clone` the repository. For this, you
         must type in a terminal window:
       </RM>
@@ -23,8 +23,22 @@ export default function DownloadAndInstall() {
       <RM>
         This will install the dependencies and create the node_modules folder in
         the project.
+      </RM> */}
+      <RM>
+        To create a project with this setup you have to type in a terminal
+        window:
       </RM>
-      <RM>Then type:</RM>
+      <Code>{`npx create-rsc-app name-of-your-app`}</Code>
+      <RM>
+        This will create a RSC app without SSR. If you want it to be with SSR
+        you must type:
+      </RM>
+      <Code>{`npx create-rsc-app name-of-the-app --ssr`}</Code>
+      <RM>That is, you pass the option `--ssr` to the command.</RM>
+      <RM>
+        After that you will have a project ready to be started for development.
+        To do that you must type (in the root of the project):
+      </RM>
       <Code>{`npm run dev`}</Code>
       <RM>
         This will run rollup (the bundler) in whatch mode. It will create the
@@ -33,7 +47,7 @@ export default function DownloadAndInstall() {
       <RM>Finally, in a new terminal window, type:</RM>
       <Code>{`npm start`}</Code>
       <RM>
-        This will start the server. After that you can go to the browser and put
+        This will start the app. After that you can go to the browser and put
         `localhost:8080` in a tab to see the app up and running.
       </RM>
       <RM>

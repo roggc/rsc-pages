@@ -34,7 +34,7 @@ export default function DesktopLayout() {
             page={{ name: "download-and-install" }}
             cssIsActive="color:orange;"
           >
-            Download and run
+            create-rsc-app
           </Link>
         </Nav>
         <SecondContainer>
