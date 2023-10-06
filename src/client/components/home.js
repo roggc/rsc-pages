@@ -37,10 +37,10 @@ export default function Home() {
         </div>
       </Counters> */}
       {isDomReady && (
-        <>
+        <CodeContainer>
           <Code>{`npx create-rsc-app@latest my-app // without SSR
 npx create-rsc-app@latest my-app --ssr // with SSR`}</Code>
-        </>
+        </CodeContainer>
       )}
       <Div>This is a setup for RSC (React Server Components) development.</Div>
       <Div>
@@ -101,4 +101,10 @@ const A = styled.a`
 const Code = styled(C)`
   overflow-x: auto !important;
   border-radius: 10px;
+`;
+
+const CodeContainer = styled.div`
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
 `;

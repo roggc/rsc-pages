@@ -30,6 +30,9 @@ export default function DesktopLayout() {
           <Link page={{ name: "eject" }} cssIsActive="color:orange;">
             Eject
           </Link>
+          <Link page={{ name: "dotenv-ready" }} cssIsActive="color:orange;">
+            Dotenv ready
+          </Link>
           <Link
             page={{ name: "download-and-install" }}
             cssIsActive="color:orange;"

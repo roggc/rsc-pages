@@ -60,6 +60,13 @@ export default function MobileLayout() {
               Eject
             </Link>
             <Link
+              page={{ name: "dotenv-ready" }}
+              cssIsActive="color:orange;"
+              onClickExtension={toggleIsShown}
+            >
+              Dotenv ready
+            </Link>
+            <Link
               page={{ name: "download-and-install" }}
               cssIsActive="color:orange;"
               onClickExtension={toggleIsShown}
