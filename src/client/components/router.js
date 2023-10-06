@@ -19,6 +19,8 @@ export default function Router() {
       return null;
     case "eject":
       return null;
+    case "dotenv-ready":
+      return null;
     default:
       return <Ups />;
   }

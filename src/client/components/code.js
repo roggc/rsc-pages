@@ -17,4 +17,6 @@ export default function Code({ children, isInline = false, ...props }) {
   );
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+  max-width: 100%;
+`;

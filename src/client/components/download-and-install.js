@@ -61,8 +61,6 @@ export default function DownloadAndInstall() {
   );
 }
 
-const P = styled.div``;
-
 const Code = styled(C)`
   overflow-x: auto !important;
   border-radius: 10px;
