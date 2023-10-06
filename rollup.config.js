@@ -65,7 +65,7 @@ export default [
       .reduce(
         (acc, entryFile) => ({
           ...acc,
-          [entryFile.replace(".js", "").replace("src/", "")]: entryFile,
+          [entryFile.replace(".js", "")]: entryFile,
         }),
         distInputEntries
       ),
@@ -73,6 +73,7 @@ export default [
       dir: "dist",
       format: "esm",
       preserveModules: true,
+      entryFileNames: "[name].mjs",
     },
     plugins: [
       babel({ babelHelpers: "bundled", exclude: "node_modules/**" }),
@@ -84,6 +85,15 @@ export default [
               "node_modules/styled-components/dist/styled-components.esm.js",
           },
         ],
+      }),
+      peerDepsExternal(),
+      nodeResolve({
+        // resolveOnly: (module) => module.includes("react-syntax-highlighter"),
+      }),
+      commonjs(),
+      json(),
+      replace({
+        "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
       }),
       image(),
     ],
@@ -120,6 +130,7 @@ export default [
       peerDepsExternal(),
       nodeResolve({
         resolveOnly: (module) => !module.includes("react-markdown"),
+        browser: true,
       }),
       commonjs(),
       json(),
