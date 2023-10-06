@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy } from "react";
 import styled from "styled-components";
 import img1 from "../assets/react.png";
 import { useSlice } from "../slices";
 import Image from "./image";
 import RSC from "./rsc";
-import C from "./code";
+const C = lazy(() => import("./code"));
 
 export default function Home() {
   const [count, setCount] = useState(0);
