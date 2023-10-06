@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
-import { renderToPipeableStream } from "react-dom/server";
+import reactDom from "react-dom/server";
+const { renderToPipeableStream } = reactDom;
 import { fillJSXwithClientComponents } from "../client/utils/index.js";
 import Router from "./components/router.js";
 import { renderJSXToClientJSX, stringifyJSX } from "./utils/index.js";
@@ -20,9 +21,10 @@ async function getJSX(url, req, deviceType) {
   const clientJSX = await renderJSXToClientJSX(
     <Router url={url} body={req.body} deviceType={deviceType} />
   );
+  const clientJSXString = JSON.stringify(clientJSX, stringifyJSX);
   return {
     clientJSX,
-    clientJSXString: JSON.stringify(clientJSX, stringifyJSX),
+    clientJSXString,
   };
 }
 

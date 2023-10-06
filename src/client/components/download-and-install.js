@@ -28,12 +28,12 @@ export default function DownloadAndInstall() {
         To create a project with this setup you have to type in a terminal
         window:
       </RM>
-      <Code>{`npx create-rsc-app name-of-your-app`}</Code>
+      <Code>{`npx create-rsc-app@latest my-app`}</Code>
       <RM>
         This will create a RSC app without SSR. If you want it to be with SSR
         you must type:
       </RM>
-      <Code>{`npx create-rsc-app name-of-the-app --ssr`}</Code>
+      <Code>{`npx create-rsc-app@latest my-app --ssr`}</Code>
       <RM>That is, you pass the option `--ssr` to the command.</RM>
       <RM>
         After that you will have a project ready to be started for development.

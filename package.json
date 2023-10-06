@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "rollup -c -w",
     "build": "rollup -c",
-    "start": "nodemon dist/index.js",
+    "start": "nodemon dist/index.mjs",
     "execute": "node dist/index.js",
     "buildandexecute": "npm run build&&npm run execute"
   },

@@ -30,6 +30,8 @@ export async function fillJSXwithClientComponents(jsx) {
         const path =
           typeof window === "undefined" && process.env.IS_NETLIFY
             ? "../src/client/".concat(jsx.type.file).concat(".mjs")
+            : typeof window === "undefined"
+            ? "../".concat(jsx.type.file).concat(".mjs")
             : "../".concat(jsx.type.file).concat(".js");
         return {
           ...jsx,

@@ -1,20 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import img1 from "../assets/react.png";
 import { useSlice } from "../slices";
 import Image from "./image";
 import RSC from "./rsc";
+import C from "./code";
 
 export default function Home() {
   const [count, setCount] = useState(0);
   const [count1, setCount1] = useSlice("count1");
   const [count2, reduxDispatch, { increment }] = useSlice("count2");
+  const [isDomReady, setIsDomReady] = useState(false);
+
+  useEffect(() => {
+    setIsDomReady(true);
+  }, []);
 
   return (
     <>
       <Title>THE RSC SETUP</Title>
       <Image src={img1} borderRadius="10px" maxWidth="80%" alt="react" />
-      <Div>
+      {/* <Div>
         <button onClick={() => setCount((c) => c + 1)}>
           get Greeting of the Day (from server)
         </button>
@@ -29,7 +35,13 @@ export default function Home() {
           <button onClick={() => reduxDispatch(increment())}>+</button>
           {count2}
         </div>
-      </Counters>
+      </Counters> */}
+      {isDomReady && (
+        <>
+          <Code>{`npx create-rsc-app@latest my-app // without SSR
+npx create-rsc-app@latest my-app --ssr // with SSR`}</Code>
+        </>
+      )}
       <Div>This is a setup for RSC (React Server Components) development.</Div>
       <Div>
         You can use it{" "}
@@ -84,4 +96,9 @@ const Counters = styled.div`
 const A = styled.a`
   text-decoration: none;
   font-weight: 700;
+`;
+
+const Code = styled(C)`
+  overflow-x: auto !important;
+  border-radius: 10px;
 `;
