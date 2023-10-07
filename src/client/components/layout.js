@@ -25,7 +25,7 @@ export default function Layout({ title }) {
           dangerouslySetInnerHTML={{ __html: "p{margin:0px;} body{margin:0;}" }}
         />
       </head>
-      <Body>
+      <Body suppressHydrationWarning={true}>
         {isMobileOrTablet ? <MobileLayout /> : <DesktopLayout />}
         <script
           type="importmap"
