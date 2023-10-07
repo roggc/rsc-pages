@@ -136,7 +136,7 @@ export default [
       json(),
       replace({
         "process.env.NODE_ENV": JSON.stringify(
-          process.env.IS_NETLIFY ? "production" : process.env.NODE_ENV
+          process.env.IS_NETLIFY ? "development" : process.env.NODE_ENV
         ),
       }),
       image(),
