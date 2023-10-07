@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import styled from "styled-components";
 import DesktopLayout from "./desktop-layout.js";
 import MobileLayout from "./mobile-layout.js";
@@ -14,31 +14,26 @@ export default function Layout({ title }) {
   };
   return (
     <html suppressHydrationWarning={true}>
-      <Suspense>
-        <head>
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-          />
-          <meta
-            name="google-site-verification"
-            content="LPtzC0bUz5hkUwD8Bh0WFWV1SE4ROetaF3O-jKx2Bpo"
-          />
-          <title>{title}</title>
-          <style
-            dangerouslySetInnerHTML={{
-              __html: "p{margin:0px;} body{margin:0;}",
-            }}
-          />
-        </head>
-        <Body suppressHydrationWarning={true}>
-          {isMobileOrTablet ? <MobileLayout /> : <DesktopLayout />}
-          <script
-            type="importmap"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(importmap) }}
-          />
-        </Body>
-      </Suspense>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+          name="google-site-verification"
+          content="LPtzC0bUz5hkUwD8Bh0WFWV1SE4ROetaF3O-jKx2Bpo"
+        />
+        <title>{title}</title>
+        <style
+          dangerouslySetInnerHTML={{
+            __html: "p{margin:0px;} body{margin:0;}",
+          }}
+        />
+      </head>
+      <Body suppressHydrationWarning={true}>
+        {isMobileOrTablet ? <MobileLayout /> : <DesktopLayout />}
+        <script
+          type="importmap"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(importmap) }}
+        />
+      </Body>
     </html>
   );
 }

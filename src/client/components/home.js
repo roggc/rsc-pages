@@ -88,10 +88,10 @@ const Title = styled(Div)`
   font-size: 2rem;
 `;
 
-const Counters = styled.div`
-  display: flex;
-  gap: 10px;
-`;
+// const Counters = styled.div`
+//   display: flex;
+//   gap: 10px;
+// `;
 
 const A = styled.a`
   text-decoration: none;
